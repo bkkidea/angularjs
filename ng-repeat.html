@@ -9,6 +9,8 @@
 		app.controller('mControllers', ['$scope', function ($scope) {
 			$scope.myarr = [1,2,3,4,5];
 			$scope.user = [{name:"AA",age:23},{name:"BB",age:93},{name:"CC",age:13},{name:"DD",age:63},{name:"EE",age:33}];
+
+			$scope.ob = {name:"mike",age:35,title:"Mr"};
 		}]);
 	</script>
 </head>
@@ -16,5 +18,27 @@
 	<div ng-repeat="element in user">
 		{{element.name}} : {{element.age}}
 	</div>
+	<hr>
+
+	<!-- user start and end -->
+	<div ng-repeat-start="element in user">
+		{{element.name}} : {{element.age}}
+	</div>
+	<hr ng-repeat-end>
+
+	<!-- user start and end -->
+	<div ng-repeat="element in myarr track by $index">
+		{{element}}
+			<span ng-show="$first">first</span>
+			<span ng-show="$middle">middle</span>
+			<span ng-show="$last">last</span>
+			<span ng-show="$even">even</span>
+			<span ng-show="$add">add</span>	
+	</div>
+	
+	<div ng-repeat="attr in ob">
+		{{ attr }}
+	</div>
+
 </body>
 </html>
