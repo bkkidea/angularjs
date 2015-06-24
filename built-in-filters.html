@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Built in filters</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+	<script>
+	var app = angular.module('app',[]);
+	app.controller('MainControllers', ['$scope', function ($scope) {
+		$scope.mydata = {arr:[{name:"Joe",age:23},{name:"Jane",age:13},{name:"Peter",age:35},{name:"Noke",age:45},{name:"Jake",age:25}]};
+		
+	}]);
+
+	app.filter('charlimit',function(){
+		return function(input,length){
+			if(!length){length = 10}
+			if(!input){return ''}
+			if(input.length <=length){return input}
+			else{return input.substring(0,length)+'...'}
+		}
+
+	});
+
+	app.filter('candrink',function(){
+		return function(data,minage){
+		var filtered = [];
+		if(!minage){minage=21}
+			for(var i=0;i<data.length;i++){
+				var value = data[i];
+				if(value.age>=minage){filtered.push(value);}
+			}
+		}
+		return filtered;
+
+	});
+
+
+	</script>
+</head>
+<body ng-controller="MainControllers">
+	<!-- <input ng-model="myfilter.name"> -->
+
+
+	<div ng-repeat="user in mydata.arr | candrink:20">
+	{{ user }}	
+	</div>
+	
+	
+	<input ng-model="data.str">
+	{{data.str | charlimit }}
+
+</body>
+</html>

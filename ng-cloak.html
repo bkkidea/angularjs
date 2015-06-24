@@ -2,23 +2,16 @@
 <html lang="en" ng-app="app">
 <head>
 	<meta charset="UTF-8">
-	<title>ng-model</title>
+	<title>ng-cloak</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
 	<script>
 	var app = angular.module('app',[]);
-	app.controller('MainController', ['$scope', function ($scope) {
-		
-	}]);
-
-
+	app.controller('MainControllers', ['$scope', function ($scope) {
+		$scope.mydata = "thsi is some data";
+	}])
 	</script>
-
 </head>
-<body ng-controller="MainController">
-<input ng-model="mydata">
-<button ng-click="mydata='123'">123</button>
-<h1>{{mydata}}</h1>	
-</div>
-
+<body ng-controller="MainControllers">
+	<span ng-cloak>{{mydata}} <div>Hey there.</div></span>
 </body>
 </html>
