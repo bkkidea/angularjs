@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>DATA</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+	<script>
+			var app = angular.module('app',[]);
+			var mainCtrl = app.controller('MainControllers', ['$scope',function ($scope) {
+				$scope.somedata = "This is some data!"
+			}]);
+
+			app.config(function($routeProvider){
+				$routeProvider
+				.when('/',
+					{ 
+						tempateUrl:'view.html',
+						resolve:{
+						data1:function($q,$timeout){
+							var defer = $q.defer();
+							$timeout(function(){
+								defer.resolve();
+								console.log('finished');
+							},2000);
+							return defer.promise;
+							}
+						}
+				}).otherwise({template:' Coul not match a route '})
+			})
+	</script>
+</head>
+<body >
+	<div ng-controller="MainControllers">
+
+
+	</div>
+
+</body>
+</html>

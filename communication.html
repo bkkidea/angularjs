@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+	<script>
+	var app = angular.module('app',[]);
+	app.controller('MainControllers', ['$scope', function ($scope){}])
+
+	app.directive('marines', [function () {
+		return {
+			restrict: 'A',
+			controller:function(){
+			this.soundoff = function(){
+				console.log("Marine Corps")
+			}
+		  }
+		}
+	}])
+
+	app.directive('gunnerySergeant',function () {
+		return {
+			restrict: 'A',
+			controller:function($scope){
+				$scope.soundoff = function(){
+					console.log("Gunnery Sgt.");
+					}
+				},
+				require:["^soldier","^marines","^?medalOfHonor"],
+				link:function(scope,element,attrs,ctrls){
+					scope.soundoff()
+					angular.forEach(ctrls, function(ctrl){
+						if (!!ctrl) {ctrl.soundoff};
+					})
+			}
+		}
+	})
+
+	app.directive('soldier', [function () {
+		return {
+			restrict: 'E',
+			controller:function(){
+					this.soundoff = function(){
+						console.log("soldier");
+					}
+			},
+		
+		};
+	}])
+
+	app.directive('medalOfHonor', [function () {
+		return {
+			restrict: 'A',
+			controller:function(){
+					this.soundoff = function(){
+						console.log("Medal Of honor");
+					}
+			},
+		};
+	}])
+
+	</script>
+
+</head>
+<body ng-controller="MainControllers">
+	
+
+	<soldier gunnery-sergeant marines medal-of-honor />
+
+</body>
+</html> 

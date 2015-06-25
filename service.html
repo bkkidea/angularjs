@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<script>
+		var app = angular.module('app',[]);
+		app.controller('MainControllers',function ($scope,myService) {
+			// console.log('xxx');
+			// myFactory.addData('bla bla bla');
+			// console.log(myFactory.getData());
+
+			console.log(myService.getData());
+			myService.addData('bla bla bla');
+			console.log(myService.getData());
+		})
+
+		// app.factory('myFactory', function () {
+		// 	var myString = "this is some other data";
+		// 	var addToString = function(newstr){
+		// 		myString += newstr
+		// 	}
+		// 	return {
+		// 		getData:function(){
+		// 			return "String contains : " + myString
+		// 		},
+		// 		addData:addToString
+		// 	};
+		// })
+
+		// app.service('myService',function(){
+		// 	var myString = "this is some other data";
+		// 	var addToString = function(newstr){myString += newstr}
+		// 		this.getData = function(){
+		// 			return "String contains : " + myString
+		// 		},
+		// 		this.addData = addToString
+		// })
+
+		// app.factory('myService', function () {
+		// 	return new ServiceClass();
+		// })
+
+		app.service('myService',ServiceClass);
+
+		function ServiceClass(){
+			var myString = "this is some other data";
+			var addToString = function(newstr){myString += newstr}
+				this.getData = function(){
+					return "String contains : " + myString
+				},
+				this.addData = addToString
+		}
+
+	</script>
+</head>
+<body ng-controller="MainControllers">
+
+</body>
+</html>

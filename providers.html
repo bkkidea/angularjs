@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>providers</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<script>
+		var app = angular.module('app',[]);
+		app.controller('MainControllers',function ($scope,myTest) {
+			console.log(myTest.getData());
+			myTest.addData('Bla Bla Bla')
+			console.log(myTest.getData());
+		 })
+
+		// app.factory('MyFactory', function () {
+		// 	var myString = "this is some other data"
+		// 	var addToString = function(newstr){
+		// 		myString += newstr
+		// 	}
+		
+		// 	return {
+		// 		getData:function(){
+		// 			return "String contains:"+ myString
+		// 		},addData : addToString
+		// 	}
+		// })
+
+		app.provider('myTest',function () {
+				var myString = "this is some other data"
+				var addToString = function(newstr){
+					myString += newstr
+				}
+			return{
+				$get:function(){
+					return{
+					 getData:function(){
+					 return "String contains:"+ myString
+				},addData: addToString
+				}
+			  }
+			}
+		})
+
+		app.config(function(myTestProvider){
+			myTestProvider.setData('some defferent string')
+		})
+
+	</script>
+</head>
+<body ng-controller="MainControllers">
+
+</body>
+</html>

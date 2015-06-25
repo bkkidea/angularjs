@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>DATA</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+
+	<script>
+			var app = angular.module('app',[])
+			.config([function () {
+				console.log('Config has been reached');
+			}]).controller('MainControllers', ['$scope','$timeout','$http',function ($scope,$timeout,$http) {
+
+				var counter = 0;
+			var makeRequest = function(){
+				$http({
+					url:"http://google.com",
+					method:"GET"
+				}).success(console.log("GET request success !!! "));
+			};
+
+			$scope.$watch(function(){
+				counter += 1;
+				console.log("Digest has been called ",counter,"times");});
+
+			$timeout(function(){
+				makeRequest();
+				console.log("End timeout");
+			},3000);
+				
+			}])
+	</script>
+</head>
+<body >
+	<div ng-controller="MainControllers">
+		<button ng-click="">Click to start a new degest loop!</button>
+		<input ng-moel="someModel">
+		
+	</div>
+
+</body>
+</html>

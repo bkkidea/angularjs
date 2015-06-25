@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<script>
+		var app = angular.module('app',[]);
+		app.controller('MainControllers', ['$scope', function(c){}])
+
+		app.directive('foo', [function () {
+			return {
+				restrict: 'E',
+				transclude:true,
+				template:'<div>This is the template content! <div ng-transclude></div></div>'
+			};
+		}])
+
+	</script>
+</head>
+<body ng-controller="MainControllers">
+	<foo>
+		<div>This is the index.html content!</div>
+	</foo>
+</body>
+</html>

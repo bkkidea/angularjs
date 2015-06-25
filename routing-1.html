@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>DATA</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-route.js"></script>
+
+	
+
+	<script>
+			var app = angular.module('app',['ngRoute']);
+			app.controller('MainControllers', ['$scope', function ($scope) {
+				$scope.somedata = "This is some data"
+			}])
+
+			app.config(function($routeProvider){
+				$routeProvider.when('/', {
+					templateUrl: 'view.html',
+					controller: 'MainControllers'
+				})
+				.when('/test', {templateUrl: 'view2.html'})
+				.when('/test', {redirect: '/test/nomatch'})
+				.otherwise({template:'Could not  match a route'})
+			})
+
+
+	</script>
+</head>
+<body >
+	
+	
+		<script type="text/ng-tempate" id="view.html">
+		<div ng-controller="MainControllers">This is the view with some data here : {{somedata}}
+		</div>
+		33
+		</script>
+
+		<script type="text/ng-tempate" id="view2.html">
+		<div ng-controller="MainControllers">This is the view with some data here : {{somedata}}
+		</div>
+		</script>
+		
+		<ng-view></ng-view>
+		
+
+
+
+
+
+	</div>
+</body>
+</html>
